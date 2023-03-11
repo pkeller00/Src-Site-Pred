@@ -50,23 +50,23 @@ Using the code under `code_data_processing` to perform
 
 
 Details can be found in the paper and code_data_processing.
-### Step 3. MMD Kernel generation for 1024-dimensional feature representations of 652 and 1052 TCGA-BRCA slides 
+### Step 3. Training and evaluation of CLAM model with 1024-dimensional feature representations of 1052 TCGA-BRCA slides 
 
-Using the code under [`MMD_distance_matrix_generator`](https://github.com/engrodawood/Hist-MMD/tree/main/MMD_distance_matrix_generator) to generate an $N \times N$ distance matrix using MMD where $N$ is the number of WSIs in a dataset.
+Used the code from [`Clustering-constrained attention multiple instance learning (CLAM)`](https://github.com/mahmoodlab/CLAM) Github to train a neural network for predicting source site labels.
 
-Details can be found in the paper and [MMD_distance_matrix_generator](https://github.com/engrodawood/Hist-MMD/tree/main/MMD_distance_matrix_generator).
+Details about the model can be found in the orginal [paper](https://arxiv.org/abs/2004.09666).
 
-### Step 4. SVM model generation and validation for TP-53 point mutation status prediciton
+### Step 4. MMD Kernel generation for 1024-dimensional feature representations of 1052 TCGA-BRCA slides 
 
-Using the code under `TP53_prediction` to generate a Support Vector Machine (SVM) with a predefined kernel (generated from the 652 distance matrix from Step 3.) to predict TP-53 point status mutation for breast patients.
+Using the code from [`Maximum Mean Discrepancy Kernels For Predictive And Prognostic Modeling Of Whole Slide Images`](https://github.com/engrodawood/Hist-MMD) Github to generate an $N \times N$ distance matrix using MMD where $N$ is the number of WSIs in a dataset.
 
-Details can be found in the paper and TP53_prediction.
+Details can be found in the original [paper](https://arxiv.org/abs/2301.09624).
 
-### Step 5. SVM model generation and validation for kernalized survival analysis
+### Step 5. Source site prediction using MMD kernels
 
-Using the code under `survival_analysis` to generate a Support Vector Machine (SVM) with a predefined kernel (generated from the 1052 distance matrix from Step 3.) to predict survival for breast patients.
+Using the code from `source_site_prediction.py` to generate a Support Vector Machine (SVM) with a predefined kernel (generated from Step 4.) to predict source site origin of a given Whole Slide Image.
 
-Details can be found in the paper and survival_analysis.
+Details can be found in the paper.
 
 ## Note
 
