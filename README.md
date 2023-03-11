@@ -1,1 +1,77 @@
-# Src-Site-Pred
+# Do Tissue Source Sites leave identifiable Signatures in Whole Slide Images beyond staining?
+### Piotr Keller*, Muhammad Dawood* and Fayyaz ul Amir Afsar Minhas
+### Tissue Image Analytics Center, University of Warwick, United Kingdom
+
+This repository contains the code for the following manuscript:
+
+Do Tissue Source Sites leave identifiable Signatures in Whole Slide Images beyond staining?, accepted by ICLR 2023 Workshop TML4H.
+
+## Introduction
+Why can deep learning predictors trained on Whole Slide Images fail to generalize? It is a common theme in Computational Pathology (CPath) to see a high performing model developed in a research setting experience a large drop in performance when it is eventually deployed to a new clinical environment. One of the major reasons for this is the batch effect that is introduced during the creation of whole slide images resulting in a domain shift. CPath pipelines try to reduce this effect via stain normalization techniques. However, in this paper, we provide empirical evidence that stain normalization methods do not result in any significant reduction of the batch effect. This is done via clustering analysis of the dataset as well as training weakly-supervised models to predict source sites. This study aims to open up avenues for further research for effective handling of batch effects for improving trustworthiness and generalization of predictive modelling in the Computational Pathology domain.
+
+<img src="staining.pdf" alt="Block Diagram"/>
+
+## Dependencies
+scipy 1.7.3
+
+numpy 1.21.6
+
+matplotlib 3.2.2
+
+geomloss 0.2.4
+
+pandas 1.3.5
+
+torch 1.12.1+cu113
+
+sksurv 0.17.2
+
+lifelines 0.27.4
+
+sklearn 1.0.2
+
+seaborn 0.11.2
+
+tqdm 4.64.1 
+
+## Usage
+### Step 1. Data download
+Download the FFPE whole slide images from GDC portal (https://portal.gdc.cancer.gov/) for breast carcinoma (TCGA-BRCA).
+
+Download corresponding gene point mutation and Disease Specific Survival from cBioPortal (https://www.cbioportal.org/).
+### Step 2. Data processing
+Using the code under `code_data_processing` to perform
+
+- Slide selection: select high quality WSIs from the original dataset 
+- Tile extraction: extract 512x512 tiles from the large WSI at a spatial resolution of 0.50 microns-per-pixel
+- Patches capturing less that 40% of informative tissue are discarded
+- Stain normalization
+- Feature extraction: extract a feature vector for each tile using SuffleNet pretrained on ImageNet
+
+
+Details can be found in the paper and code_data_processing.
+### Step 3. MMD Kernel generation for 1024-dimensional feature representations of 652 and 1052 TCGA-BRCA slides 
+
+Using the code under [`MMD_distance_matrix_generator`](https://github.com/engrodawood/Hist-MMD/tree/main/MMD_distance_matrix_generator) to generate an $N \times N$ distance matrix using MMD where $N$ is the number of WSIs in a dataset.
+
+Details can be found in the paper and [MMD_distance_matrix_generator](https://github.com/engrodawood/Hist-MMD/tree/main/MMD_distance_matrix_generator).
+
+### Step 4. SVM model generation and validation for TP-53 point mutation status prediciton
+
+Using the code under `TP53_prediction` to generate a Support Vector Machine (SVM) with a predefined kernel (generated from the 652 distance matrix from Step 3.) to predict TP-53 point status mutation for breast patients.
+
+Details can be found in the paper and TP53_prediction.
+
+### Step 5. SVM model generation and validation for kernalized survival analysis
+
+Using the code under `survival_analysis` to generate a Support Vector Machine (SVM) with a predefined kernel (generated from the 1052 distance matrix from Step 3.) to predict survival for breast patients.
+
+Details can be found in the paper and survival_analysis.
+
+## Note
+
+Some intermediate data are put into the folder `data`.
+
+--------
+
+\* Joint first authorship
