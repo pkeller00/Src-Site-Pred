@@ -9,7 +9,7 @@ Do Tissue Source Sites leave identifiable Signatures in Whole Slide Images beyon
 ## Introduction
 Why can deep learning predictors trained on Whole Slide Images fail to generalize? It is a common theme in Computational Pathology (CPath) to see a high performing model developed in a research setting experience a large drop in performance when it is eventually deployed to a new clinical environment. One of the major reasons for this is the batch effect that is introduced during the creation of whole slide images resulting in a domain shift. CPath pipelines try to reduce this effect via stain normalization techniques. However, in this paper, we provide empirical evidence that stain normalization methods do not result in any significant reduction of the batch effect. This is done via clustering analysis of the dataset as well as training weakly-supervised models to predict source sites. This study aims to open up avenues for further research for effective handling of batch effects for improving trustworthiness and generalization of predictive modelling in the Computational Pathology domain.
 
-<img src="Staining.pdf" alt="Block Diagram"/>
+<img src="Staining.png" alt="Block Diagram"/>
 
 ## Dependencies
 scipy 1.7.3
