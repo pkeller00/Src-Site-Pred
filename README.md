@@ -40,7 +40,6 @@ Download the FFPE whole slide images from GDC portal (https://portal.gdc.cancer.
 
 Download corresponding gene point mutation and Disease Specific Survival from cBioPortal (https://www.cbioportal.org/).
 ### Step 2. Data processing
-Using the code under `code_data_processing` to perform
 
 - Slide selection: select high quality WSIs from the original dataset 
 - Tile extraction: extract 512x512 tiles from the large WSI at a spatial resolution of 0.50 microns-per-pixel
@@ -49,7 +48,7 @@ Using the code under `code_data_processing` to perform
 - Feature extraction: extract a feature vector for each tile using SuffleNet pretrained on ImageNet
 
 
-Details can be found in the paper and code_data_processing.
+Details can be found in the paper.
 ### Step 3. Training and evaluation of CLAM model with 1024-dimensional feature representations of 1052 TCGA-BRCA slides 
 
 Used the code from [`Clustering-constrained attention multiple instance learning (CLAM)`](https://github.com/mahmoodlab/CLAM) Github to train a neural network for predicting source site labels.
